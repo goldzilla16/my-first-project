@@ -27,10 +27,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run tests and generate coverage
-      - name: Run tests and generate coverage
+      # Step 4: Run tests
+      - name: Run tests
         run: |
-          pip install coverage pytest
+          pip install pytest coverage
           coverage run -m pytest
           coverage report -m
           coverage xml
@@ -44,6 +44,7 @@ jobs:
 
       # Step 6: Deploy to Heroku using official GitHub Action
       - name: Deploy to Heroku
+        if: success()
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
