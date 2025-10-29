@@ -27,14 +27,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run tests with coverage
+      # Step 4: Run tests and generate coverage
       - name: Run tests and generate coverage
         run: |
           coverage run -m pytest
           coverage report -m
           coverage xml
 
-      # Step 5: Upload coverage report (optional)
+      # Step 5: Upload coverage report as artifact (optional)
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
@@ -50,10 +50,12 @@ jobs:
         run: |
           # Install Heroku CLI
           curl https://cli-assets.heroku.com/install.sh | sh
-          
-          # Login to Heroku using API key
+
+          # Authenticate Heroku CLI using API key
           echo $HEROKU_API_KEY | heroku auth:token
-          
-          # Add Heroku remote and push
+
+          # Add Heroku git remote
           git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git
+
+          # Push code to Heroku
           git push heroku main
