@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+
+# Environment
+.env
+.venv/
+venv/
+
+# Coverage reports
+coverage.xml
+htmlcov/
+.coverage
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# MacOS
+.DS_Store
