@@ -54,6 +54,11 @@ jobs:
           # Authenticate Heroku CLI using API key
           echo $HEROKU_API_KEY | heroku auth:token
 
+          # Push code using Heroku CLI
+          heroku git:remote -a $HEROKU_APP_NAME
+          git push heroku main
+
+
           # Add Heroku git remote
           git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git
 
