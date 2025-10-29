@@ -51,16 +51,11 @@ jobs:
           # Install Heroku CLI
           curl https://cli-assets.heroku.com/install.sh | sh
 
-          # Authenticate Heroku CLI using API key
+          # Authenticate Heroku CLI non-interactively
           echo $HEROKU_API_KEY | heroku auth:token
 
-          # Push code using Heroku CLI
+          # Add Heroku git remote (CLI handles auth)
           heroku git:remote -a $HEROKU_APP_NAME
-          git push heroku main
-
-
-          # Add Heroku git remote
-          git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git
 
           # Push code to Heroku
           git push heroku main
