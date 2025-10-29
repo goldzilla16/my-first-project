@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, abort, render_template, redirect, url_for
+from flask import Flask, request, abort, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -12,18 +12,6 @@ users = [
 @app.route("/")
 def home():
     return render_template("index.html")
-
-# Add numbers via URL params
-@app.route("/add/<int:a>/<int:b>")
-def add(a, b):
-    result = a + b
-    return render_template("index.html", add_result=result)
-
-# Multiply numbers via URL params
-@app.route("/multiply/<int:a>/<int:b>")
-def multiply(a, b):
-    result = a * b
-    return render_template("index.html", multiply_result=result)
 
 # View users
 @app.route("/users")

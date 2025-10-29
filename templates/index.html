@@ -6,27 +6,6 @@
 </head>
 <body>
     <h1>Welcome to Flask CI/CD Demo!</h1>
-
-    <h2>Add Numbers</h2>
-    <form action="/add/" method="get">
-        <input type="number" name="a" placeholder="a" required>
-        <input type="number" name="b" placeholder="b" required>
-        <button type="submit">Add</button>
-    </form>
-    {% if add_result is defined %}
-    <p>Result: {{ add_result }}</p>
-    {% endif %}
-
-    <h2>Multiply Numbers</h2>
-    <form action="/multiply/" method="get">
-        <input type="number" name="a" placeholder="a" required>
-        <input type="number" name="b" placeholder="b" required>
-        <button type="submit">Multiply</button>
-    </form>
-    {% if multiply_result is defined %}
-    <p>Result: {{ multiply_result }}</p>
-    {% endif %}
-
     <h2>Users</h2>
     <a href="/users">View Users</a>
 </body>
