@@ -30,11 +30,12 @@ jobs:
       # Step 4: Run tests and generate coverage
       - name: Run tests and generate coverage
         run: |
+          pip install coverage pytest
           coverage run -m pytest
           coverage report -m
           coverage xml
 
-      # Step 5: Upload coverage report as artifact (optional)
+      # Step 5: Upload coverage report (optional)
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
@@ -54,8 +55,8 @@ jobs:
           # Authenticate Heroku CLI non-interactively
           echo $HEROKU_API_KEY | heroku auth:token
 
-          # Add Heroku git remote (CLI handles auth)
+          # Set Heroku remote
           heroku git:remote -a $HEROKU_APP_NAME
 
-          # Push code to Heroku
+          # Push to Heroku
           git push heroku main

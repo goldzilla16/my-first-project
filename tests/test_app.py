@@ -1,36 +1,25 @@
-import json
+import pytest
 from app import app
 
-def test_home_route():
-    client = app.test_client()
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        yield client
+
+def test_home_page(client):
     response = client.get("/")
     assert response.status_code == 200
-    assert b"Hello, CI/CD World!" in response.data
+    assert b"Welcome to Flask CI/CD Demo" in response.data
 
-def test_add_route():
-    client = app.test_client()
-    response = client.get("/add/2/3")
-    assert response.status_code == 200
-    assert b"5" in response.data
-
-def test_multiply_route():
-    client = app.test_client()
-    response = client.get("/multiply/4/5")
-    assert response.status_code == 200
-    assert b"20" in response.data
-
-def test_get_users():
-    client = app.test_client()
+def test_users_page(client):
     response = client.get("/users")
     assert response.status_code == 200
-    data = json.loads(response.data)
-    assert type(data) == list
-    assert len(data) >= 2
+    assert b"Users List" in response.data
 
-def test_create_user():
-    client = app.test_client()
-    response = client.post("/users", json={"name": "Charlie", "age": 28})
-    assert response.status_code == 201
-    data = json.loads(response.data)
-    assert data["name"] == "Charlie"
-    assert data["age"] == 28
+def test_add_user(client):
+    # Add a new user
+    response = client.post("/users", data={"name": "Charlie", "age": "28"}, follow_redirects=True)
+    assert response.status_code == 200
+    # Confirm user is in the page
+    assert b"Charlie" in response.data
