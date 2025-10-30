@@ -5,7 +5,8 @@ app = Flask(__name__)
 # In-memory “database” of users
 users = [
     {"id": 1, "name": "Alice", "age": 25},
-    {"id": 2, "name": "Bob", "age": 30}
+    {"id": 2, "name": "Bob", "age": 30},
+     {"id": 3, "name": "Hamza", "age": 981}
 ]
 
 # Home page
